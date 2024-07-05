@@ -1,12 +1,12 @@
 import AnecdoteForm from './components/AnecdoteForm'
 import Notification from './components/Notification'
-import { useQuery } from '@tanstack/react-query'
-import axios from 'axios'
+import { useQuery, useMutation } from '@tanstack/react-query'
+import { getAnecdotes, createAnecdote } from './requests'
 
 const App = () => {
   const result = useQuery({
     queryKey: ['anecdotes'],
-    queryFn: () => axios.get('http://localhost:3001/anecdotes').then(res => res.data)
+    queryFn: getAnecdotes
   })
 
   if( result.isLoading ) {
